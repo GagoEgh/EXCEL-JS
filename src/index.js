@@ -1,3 +1,3 @@
 
 console.log("index ======");
-console.log('---------------')
+console.log('-------------')
