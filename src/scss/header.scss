@@ -1,0 +1,44 @@
+@import 'variable';
+@import 'mixins';
+
+.header{
+  position: relative;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $border_color;
+  height: $header_height;
+
+   .input{
+    margin: 0;
+    padding: 4px 7px;
+    min-width: 1px;
+    color: #000;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    height: 20px;
+    font-size: 18px;
+    line-height: 22px;
+    outline: none;
+    transition: all 0.3s;
+
+    
+    &:hover {
+      border: 1px solid $border_color;
+    }
+
+    &:focus-visible{
+      border: 1px solid lightblue !important;
+    }
+  }
+
+  i{
+    @include icon();
+    &:active{
+      @include active(red)
+    }
+  }
+
+}

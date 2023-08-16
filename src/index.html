@@ -4,9 +4,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <title>PURE JS EXCEL</title>
   </head>
   <body>
-    <div id="app" class="container"></div>
+    <div id="app" class="container">
+      <div class="excel">
+        <div class="header">
+          <input value="new table" class="input" />
+          <div>
+            <i class="material-icons">delete</i>
+            <i class="material-icons">exit_to_app</i>
+          </div>
+        </div>
+        <div class="toolbar">
+          <i class="material-icons">format_align_left</i>
+          <i class="material-icons">format_align_right</i>
+          <i class="material-icons">format_align_center</i>
+          <i class="material-icons">format_bold</i>
+          <i class="material-icons">format_underlined</i>
+          <i class="material-icons">format_italic</i>
+        </div>
+        <div class="formula">
+          <div class="info">fx</div>
+          <div
+            class="div-input"
+            contenteditable="true"
+            spellcheck="false"
+          ></div>
+        </div>
+        <div class="table">
+          <div class="t-head">
+            <div class="index">1</div>
+            <div class="title"></div>
+          </div>
+          <div class="t-main">
+            <div class="index"></div>
+            <div class="text"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

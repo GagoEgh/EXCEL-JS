@@ -1,0 +1,17 @@
+@import 'variable';
+@import 'mixins';
+
+.toolbar{
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: $toolbar_height;
+  border-bottom:1px solid $border_color;
+
+  i{
+    @include icon();
+    &:active{
+      @include active(rgba(23, 148, 23, 0.843))
+    }
+  }
+}

@@ -1,0 +1,23 @@
+@import 'mixins.scss';
+@import 'variable.scss';
+
+.table{
+  border: 1px solid $border_color;
+  .t-head{
+    display: flex;
+
+    .title{
+
+    }
+  }
+
+  .t-main{
+
+  }
+
+  .index{
+    border-right: 1px solid $border_color;
+    width: 28px;
+    background-color: #d0cfcf2b;
+  }
+}

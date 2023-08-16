@@ -1,0 +1,16 @@
+
+@mixin active($color){
+  color: $color;
+}
+
+@mixin  icon(){
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+    transition: 0.3s;
+  
+    &:hover{
+      background: #f6f4f4;
+    }
+}
+
