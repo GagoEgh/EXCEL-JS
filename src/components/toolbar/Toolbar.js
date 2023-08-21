@@ -1,6 +1,10 @@
 import { ExcelComponent } from "../../core/Excel.component";
 export class Toolbar extends ExcelComponent {
   static className = "toolbar";
+  constructor(node) {
+    super(node);
+  }
+  
   html() {
     return `
       <i class="material-icons">format_align_left</i>

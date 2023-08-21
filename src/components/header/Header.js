@@ -2,6 +2,9 @@ import { ExcelComponent } from "../../core/Excel.component";
 
 export class Header extends ExcelComponent {
   static className = "header";
+  constructor(node) {
+    super(node);
+  }
 
   html() {
     return `

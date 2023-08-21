@@ -1,12 +1,39 @@
-class Dom {}
+class Dom {
+  constructor(elem) {
+    if (typeof elem === "string") {
+      this.$node = document.querySelector(elem);
+    } else {
+      this.$node = elem;
+    }
+  }
 
-export const $ = () => {
-  return new Dom();
+  append(tag) {
+    if (tag instanceof Dom) {
+      tag = tag.$node;
+    }
+    this.$node.append(tag);
+    return this;
+  }
+
+  toHTML(html) {
+    if (typeof html === "string") {
+      this.$node.innerHTML = html;
+      return this;
+    }
+
+    return this.$node.outerHTML.trim();
+  }
+}
+
+export const $ = (el) => {
+  return new Dom(el);
 };
 
-
-$.create = (element,classes)=>{
+$.create = (element, classes = "") => {
   let el = document.createElement(element);
-  el.classList.add(classes);
-  return el
-}
+  if (classes) {
+    el.classList.add(classes);
+  }
+
+  return $(el);
+};

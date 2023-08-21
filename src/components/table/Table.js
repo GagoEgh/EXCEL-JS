@@ -1,7 +1,10 @@
 import { ExcelComponent } from "../../core/Excel.component";
 export class Table extends ExcelComponent{
   static className = "table";
-
+  constructor(node){
+    super(node);
+  }
+  
   html() {
     return `
     <div class="t-head">
