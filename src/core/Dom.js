@@ -23,6 +23,16 @@ class Dom {
 
     return this.$node.outerHTML.trim();
   }
+
+  on(event, callback) {
+    addEventListener(event, callback);
+  }
+
+  off(event, callback) {
+    removeEventListener(event, callback);
+  }
+
+ 
 }
 
 export const $ = (el) => {

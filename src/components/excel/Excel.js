@@ -8,11 +8,12 @@ export class Excel {
 
   #createNode() {
     let excelDiv = $.create("div", "excel");
-    this.components.forEach((Component) => {
+    this.components = this.components.map((Component) => {
       let className = $.create("div", Component.className);
       const component = new Component(className);
       className.toHTML(component.html());
       excelDiv.append(className);
+      return component;
     });
 
     return excelDiv;
@@ -20,5 +21,8 @@ export class Excel {
 
   render() {
     this.$el.append(this.#createNode());
+    this.components.forEach((component) => {
+      component.init();
+    });
   }
 }

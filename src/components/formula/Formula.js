@@ -4,12 +4,15 @@ export class Formula extends ExcelComponent {
   static className = "formula";
 
   constructor(node) {
-    super(node);
+    const options = {
+      name: "Formula",
+      listeners: ["input", "click"],
+    };
+    super(node, options);
   }
-  
+
   html() {
     return `
-    
       <div class="info">fx</div>
       <div
         class="div-input"
@@ -18,4 +21,10 @@ export class Formula extends ExcelComponent {
       ></div>
     `;
   }
+
+  onInput(event) {
+    console.log("Formul event: onInput", event.target.innerText);
+  }
+
+  onClick() {}
 }
