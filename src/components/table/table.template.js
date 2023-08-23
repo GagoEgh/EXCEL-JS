@@ -19,15 +19,19 @@ function createChars() {
   return chars;
 }
 
-function createTitleBlock(chars) {
+function createTitleBlock(chars, isSet = false) {
   let titleDiv = $.create("div", "title");
+
   if (chars.length > 0) {
     chars.forEach((item) => {
       let titleBlock = $.create("div", "title-block");
-      titleBlock.$node.setAttribute("contenteditable", "true");
-      titleBlock.$node.setAttribute("spellcheck", "false");
+
       titleBlock.toHTML(item);
       titleDiv.append(titleBlock);
+      if (isSet) {
+        titleBlock.setAttribute("contenteditable", "true");
+        titleBlock.setAttribute("spellcheck", "false");
+      }
     });
   }
 
@@ -56,9 +60,8 @@ export function createTableBody(columns = 20) {
     let index = $.create("div", "index");
     index.toHTML("" + (i + 1));
     mainNode.append(index);
-    let titleDiv = createTitleBlock(chars);
+    let titleDiv = createTitleBlock(chars, true);
     mainNode.append(titleDiv);
-
     block.append(mainNode);
   }
 

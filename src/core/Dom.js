@@ -32,7 +32,10 @@ class Dom {
     removeEventListener(event, callback);
   }
 
- 
+  setAttribute(name, value) {
+    this.$node.setAttribute(name, value);
+    return this;
+  }
 }
 
 export const $ = (el) => {
