@@ -1,4 +1,4 @@
-import { capitalizeLetter } from "./helpers";
+import { firstLetterUpper } from "./helpers";
 
 export class DomListener {
   constructor(node, listeners = []) {
@@ -6,24 +6,24 @@ export class DomListener {
     this.listeners = listeners;
   }
 
-  initEventListener() {
+  initListener() {
     this.listeners.forEach((listener) => {
-      let eventName = concatEvent(listener);
-      this[eventName] = this[eventName].bind(this);
-      this.$node.on(listener, this[eventName]);
+      const event = "on" + firstLetterUpper(listener);
+      if (!this[event]) {
+        const name = this.name || "";
+        throw new Error(
+          `Method ${event} is not implemented in ${name} Component`
+        );
+      }
+
+      this.$node.on(listener, this[event]);
     });
   }
 
-  removeEventListener() {
+  removeListener() {
     this.listeners.forEach((listener) => {
-      let eventName = concatEvent(listener);
-      this[eventName] = this[eventName].bind(this);
-      
-      this.$node.off(listener, this[eventName]);
+      const event = "on" + firstLetterUpper(listener);
+      this.$node.off(listener, this[event]);
     });
   }
-}
-
-function concatEvent(listener) {
-  return "on" + capitalizeLetter(listener);
 }

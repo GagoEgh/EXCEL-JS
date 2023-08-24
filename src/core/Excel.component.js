@@ -1,22 +1,18 @@
 import { DomListener } from "./DomListener";
 
 export class ExcelComponent extends DomListener {
-  constructor(node, options = {}) {
-    super(node, options.listeners);
-    if (!node) {
-      throw new Error("node is not declaret");
-    }
+  constructor(node, option = {}) {
+    super(node, option.listeners);
   }
-
-  html() {
+  toHTML() {
     return "";
   }
 
   init() {
-    this.initEventListener();
+    this.initListener();
   }
 
   destroy() {
-    this.removeEventListener();
+    this.removeListener();
   }
 }

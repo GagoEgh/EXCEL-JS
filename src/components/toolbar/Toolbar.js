@@ -2,7 +2,6 @@ import { ExcelComponent } from "../../core/Excel.component";
 
 export class Toolbar extends ExcelComponent {
   static className = "toolbar";
-
   constructor(node) {
     const options = {
       name: "Toolbar",
@@ -11,18 +10,18 @@ export class Toolbar extends ExcelComponent {
     super(node, options);
   }
 
-  html() {
+  toHTML() {
     return `
-      <i class="material-icons">format_align_left</i>
-      <i class="material-icons">format_align_right</i>
-      <i class="material-icons">format_align_center</i>
-      <i class="material-icons">format_bold</i>
-      <i class="material-icons">format_underlined</i>
-      <i class="material-icons">format_italic</i>
+        <i class="material-icons">format_align_left</i>
+        <i class="material-icons">format_align_right</i>
+        <i class="material-icons">format_align_center</i>
+        <i class="material-icons">format_bold</i>
+        <i class="material-icons">format_underlined</i>
+        <i class="material-icons">format_italic</i>
     `;
   }
 
   onClick(event) {
-    console.log("toolbar click", event.target);
+    console.log(event.target);
   }
 }

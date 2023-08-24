@@ -1,69 +1,68 @@
-import { $ } from "@core/dom";
-
-const charCode = {
+import { $ } from "@core/Dom";
+const char = {
   A: 65,
   Z: 91,
 };
 
-function createArray() {
-  const size = charCode.Z - charCode.A;
+function emptyBlock() {
+  const size = char.Z - char.A;
   let chars = new Array(size).fill("");
   return chars;
 }
 
-function createChars() {
-  let chars = createArray();
-  chars = chars.map(
-    (item, index) => (item = String.fromCodePoint(charCode.A + index))
-  );
+function createChar() {
+  let chars = emptyBlock();
+  chars = chars.map((item, index) => {
+    item = String.fromCharCode(char.A + index);
+    return item;
+  });
   return chars;
 }
 
-function createTitleBlock(chars, isSet = false) {
-  let titleDiv = $.create("div", "title");
+function createTittleBlock(chars, isAttr = false) {
+  let title = $.create("div", "title");
+  chars.forEach((item) => {
+    let titleBlock = $.create("div", "title-block");
+    if (isAttr) {
+      titleBlock.setAttribute("contenteditable", "true");
+      titleBlock.setAttribute("spellcheck", "false");
+    }
 
-  if (chars.length > 0) {
-    chars.forEach((item) => {
-      let titleBlock = $.create("div", "title-block");
-
-      titleBlock.toHTML(item);
-      titleDiv.append(titleBlock);
-      if (isSet) {
-        titleBlock.setAttribute("contenteditable", "true");
-        titleBlock.setAttribute("spellcheck", "false");
-      }
-    });
-  }
-
-  return titleDiv;
+    titleBlock.innerHTML(item);
+    title.append(titleBlock);
+  });
+  return title;
 }
 
-function createTitle(fn) {
-  const chars = fn;
-  return createTitleBlock(chars);
-}
-
-export function createTableHead() {
-  let titleHead = $.create("div", "t-head");
+function createIndex(html) {
   let index = $.create("div", "index");
-  index.toHTML("N");
-  titleHead.append(index);
-  titleHead.append(createTitle(createChars()));
-  return titleHead.$node;
+  index.innerHTML(html);
+  return index;
 }
 
-export function createTableBody(columns = 20) {
-  let chars = createArray();
+export function createBody(column = 22) {
   let block = $.create("div");
-  for (let i = 0; i < columns; i++) {
-    let mainNode = $.create("div", "t-main");
-    let index = $.create("div", "index");
-    index.toHTML("" + (i + 1));
-    mainNode.append(index);
-    let titleDiv = createTitleBlock(chars, true);
-    mainNode.append(titleDiv);
-    block.append(mainNode);
+  let chars = emptyBlock();
+
+  for (let i = 0; i < column; i++) {
+    let index = createIndex("" + (i + 1));
+    let main = $.create("div", "t-main");
+    let title = createTittleBlock(chars, true);
+    main.append(index);
+    main.append(title);
+    block.append(main);
   }
 
   return block.$node;
+}
+
+export function createHead() {
+  let index = createIndex("N");
+
+  let head = $.create("div", "t-head");
+  head.append(index);
+  const chars = createChar();
+  let title = createTittleBlock(chars);
+  head.append(title);
+  return head.$node;
 }

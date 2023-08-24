@@ -1,26 +1,27 @@
-import { $ } from "@core/dom";
+import { $ } from "@core/Dom";
 
 export class Excel {
   constructor(selector, options) {
     this.components = options.components;
-    this.$el = $(selector);
+    this.selector = $(selector);
   }
 
   #createNode() {
-    let excelDiv = $.create("div", "excel");
+    let excel = $.create("div", "excel");
+
     this.components = this.components.map((Component) => {
-      let className = $.create("div", Component.className);
-      const component = new Component(className);
-      className.toHTML(component.html());
-      excelDiv.append(className);
+      let node = $.create("div", Component.className);
+      let component = new Component(node);
+      node.innerHTML(component.toHTML());
+      excel.append(node);
       return component;
     });
 
-    return excelDiv;
+    this.selector.append(excel);
   }
 
-  render() {
-    this.$el.append(this.#createNode());
+  initComponent() {
+    this.#createNode();
     this.components.forEach((component) => {
       component.init();
     });

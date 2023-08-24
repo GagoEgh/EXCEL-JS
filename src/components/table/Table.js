@@ -1,14 +1,13 @@
 import { ExcelComponent } from "../../core/Excel.component";
-import { createTableHead, createTableBody } from "./table.template";
-
+import { createHead, createBody } from "./table.template";
 export class Table extends ExcelComponent {
   static className = "table";
   constructor(node) {
     super(node);
+    this.$node = node;
   }
-
-  html() {
-    this.$node.append(createTableHead());
-    this.$node.append(createTableBody(14));
+  toHTML() {
+    this.$node.append(createHead());
+    this.$node.append(createBody(12));
   }
 }
