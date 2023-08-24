@@ -24,12 +24,17 @@
       height: inherit;
       border-right: 1px solid $border_color;
     }
+
+   
   }
 
   .t-main{
     display: flex;
     height: 30px;
-    border-bottom: 1px solid $border_color;
+    // border-bottom: 1px solid $border_color;
+    .title-block{
+      background-color: white;
+    }
   }
 
   .index{
