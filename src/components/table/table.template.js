@@ -21,6 +21,7 @@ function createChar() {
 
 function createTittleBlock(chars, isAttr = false) {
   let title = $.create("div", "title");
+
   chars.forEach((item, index) => {
     let titleBlock = $.create("div", "title-block");
     let block = $.create("div", "block");
@@ -36,7 +37,6 @@ function createTittleBlock(chars, isAttr = false) {
       block.append(col);
       block.setAttribute("data-type", "resizing");
     }
-
     title.append(block);
   });
 
@@ -44,20 +44,34 @@ function createTittleBlock(chars, isAttr = false) {
 }
 
 function createIndex(html) {
-  let index = $.create("div", "index");
+  let index = $.create("div");
   index.innerHTML(html);
   return index;
 }
 
+function createIndexBlock(i) {
+  let index = createIndex("" + (i + 1));
+  let row = $.create("div", "row");
+  row.setAttribute("data-resize", "row");
+
+  let indexBlock = $.create("div", "index");
+  indexBlock.append(index);
+  indexBlock.append(row);
+  indexBlock.setAttribute("data-type", "resizing");
+  indexBlock.setAttribute("data-row", i);
+  return indexBlock;
+}
 export function createBody(column = 22) {
   let block = $.create("div");
   let chars = emptyBlock();
 
   for (let i = 0; i < column; i++) {
-    let index = createIndex("" + (i + 1));
+    let indexBlock = createIndexBlock(i);
     let main = $.create("div", "t-main");
     let title = createTittleBlock(chars, true);
-    main.append(index);
+    title.setAttribute("data-row", i);
+    main.setAttribute("data-row", i);
+    main.append(indexBlock);
     main.append(title);
     block.append(main);
   }
@@ -66,8 +80,9 @@ export function createBody(column = 22) {
 }
 
 export function createHead() {
-  let index = createIndex("N");
+  let index = $.create("div", "index");
 
+  index.innerHTML("N");
   let head = $.create("div", "t-head");
   head.append(index);
   const chars = createChar();

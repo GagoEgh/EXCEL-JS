@@ -51,6 +51,21 @@ class Dom {
   getAttribute(attributeName) {
     return this.$node.getAttribute(attributeName);
   }
+
+  get data() {
+    return this.$node.dataset;
+  }
+
+  toggle(className) {
+    return this.$node.classList.toggle(className);
+  }
+
+  createStyle(options) {
+    for (let key in options) {
+      this.$node.style[key] = options[key];
+    }
+    return this.$node;
+  }
 }
 
 export const $ = (el) => {

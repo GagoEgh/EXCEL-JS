@@ -15,26 +15,44 @@ export class Table extends ExcelComponent {
 
   toHTML() {
     this.$node.append(createHead());
-    this.$node.append(createBody(12));
+    this.$node.append(createBody(31));
   }
 
   onMousedown(event) {
     if (event.target.dataset.resize) {
       let $resizer = $(event.target);
+      let type = $resizer.data.resize;
       let $node = $($resizer.closest('[data-type="resizing"]'));
-      let attribute = $node.getAttribute("data-id");
-
+      let attribute;
+      let blocks = [];
       let $nodeCord = $node.getCords();
-      let blocks = this.$node.$node.querySelectorAll(
-        `[data-id="${attribute}"]`
-      );
 
       document.onmousemove = (e) => {
-        let width = e.pageX - $nodeCord.right + $nodeCord.width;
-        $node.$node.style.width = width + "px";
-        blocks.forEach((block) => {
-          block.style.width = width + "px";
-        });
+        if (type === "col") {
+          attribute = $node.getAttribute("data-id");
+          blocks = $(
+            this.$node.$node.querySelectorAll(`[data-id="${attribute}"]`)
+          );
+
+          let width = e.pageX - $nodeCord.right + $nodeCord.width;
+          $node.createStyle({ width: `${width}px` });
+          blocks.$node.forEach((block) => {
+            let $block = $(block);
+            $block.createStyle({ width: `${width}px` });
+          });
+        } else {
+          attribute = $node.getAttribute("data-row");
+          blocks = $(
+            this.$node.$node.querySelectorAll(`[data-row="${attribute}"]`)
+          );
+
+          let height = e.pageY - $nodeCord.bottom + $nodeCord.height;
+          $node.createStyle({ height: `${height}px` });
+          blocks.$node.forEach((block) => {
+            let $block = $(block);
+            $block.createStyle({ height: `${height}px` });
+          });
+        }
       };
 
       document.onmouseup = () => {

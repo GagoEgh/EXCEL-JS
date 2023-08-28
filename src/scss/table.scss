@@ -6,22 +6,21 @@
   overflow-x: auto;
   border-left: 1px solid $border_color;
   border-right: 1px solid $border_color;
-
  
   .t-head{
     display: flex;
     justify-content: start;
     height: 30px;
+    
   }
 
   .title{
     display: flex;
     border-bottom: 1px solid $border_color;
-
+    min-height: 30px;
     .block{
       display: flex;
       justify-content: space-between;
-      background-color: #d0cfcf2b;
       text-align: center;
       width: 180px;
       min-width: 50px;
@@ -29,11 +28,13 @@
       border-right: 1px solid $border_color;
       margin: 0;
       padding: 0;
+      min-height: 30px;
       .title-block{
         align-self: center;
         justify-items: center;
         width: inherit;
         height: inherit;
+        min-height: 30px;
         padding: 3px;
       }
 
@@ -45,16 +46,11 @@
          }
       }
     }
-
   }
 
   .t-main{
     display: flex;
-    height: 30px;
-    // border-bottom: 1px solid $border_color;
-    .title-block{
-      background-color: white;
-    }
+    min-height: 30px;
   }
 
   .index{
@@ -64,6 +60,24 @@
     text-align: center;
     border-right: 1px solid $border_color;
     width: 38px;
+    min-height: 30px;
     background-color: #d0cfcf2b;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .row{
+      border: 1px solid transparent;
+      width: inherit;
+      align-self: center;
+      transition: border 0.2s;
+
+       &:hover{
+        border: 1px solid rgb(148, 209, 229);
+       }
+    }
+  }
+
+  .bg{
+    background-color: white;
   }
 }
