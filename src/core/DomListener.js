@@ -16,6 +16,7 @@ export class DomListener {
         );
       }
 
+      this[event] = this[event].bind(this);
       this.$node.on(listener, this[event]);
     });
   }

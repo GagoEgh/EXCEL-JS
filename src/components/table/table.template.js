@@ -21,16 +21,25 @@ function createChar() {
 
 function createTittleBlock(chars, isAttr = false) {
   let title = $.create("div", "title");
-  chars.forEach((item) => {
+  chars.forEach((item, index) => {
     let titleBlock = $.create("div", "title-block");
+    let block = $.create("div", "block");
+    block.setAttribute("data-id", `${index}`);
+    block.append(titleBlock);
     if (isAttr) {
       titleBlock.setAttribute("contenteditable", "true");
       titleBlock.setAttribute("spellcheck", "false");
+    } else {
+      let col = $.create("div", "col");
+      titleBlock.innerHTML(item);
+      col.setAttribute("data-resize", "col");
+      block.append(col);
+      block.setAttribute("data-type", "resizing");
     }
 
-    titleBlock.innerHTML(item);
-    title.append(titleBlock);
+    title.append(block);
   });
+
   return title;
 }
 

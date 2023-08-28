@@ -34,6 +34,23 @@ class Dom {
   setAttribute(name, value) {
     this.$node.setAttribute(name, value);
   }
+
+  addClass(cl) {
+    this.$node.classList.add(cl);
+    return this;
+  }
+
+  closest(str) {
+    return this.$node.closest(str);
+  }
+
+  getCords() {
+    return this.$node.getBoundingClientRect();
+  }
+
+  getAttribute(attributeName) {
+    return this.$node.getAttribute(attributeName);
+  }
 }
 
 export const $ = (el) => {
@@ -43,7 +60,13 @@ export const $ = (el) => {
 $.create = (elemName, classes) => {
   let el = document.createElement(elemName);
   if (classes) {
-    el.classList.add(classes);
+    if (Array.isArray(classes)) {
+      classes.forEach((item) => {
+        el.classList.add(item);
+      });
+    } else {
+      el.classList.add(classes);
+    }
   }
   return $(el);
 };
