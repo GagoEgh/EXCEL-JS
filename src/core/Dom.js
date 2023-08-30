@@ -34,42 +34,6 @@ class Dom {
   setAttribute(name, value) {
     this.$node.setAttribute(name, value);
   }
-
-  addClass(cl) {
-    this.$node.classList.add(cl);
-    return this;
-  }
-
-  closest(str) {
-    return this.$node.closest(str);
-  }
-
-  getCords() {
-    return this.$node.getBoundingClientRect();
-  }
-
-  getAttribute(attributeName) {
-    return this.$node.getAttribute(attributeName);
-  }
-
-  get data() {
-    return this.$node.dataset;
-  }
-
-  toggle(className) {
-    return this.$node.classList.toggle(className);
-  }
-
-  createStyle(options = {}) {
-    for (let key in options) {
-      this.$node.style[key] = options[key];
-    }
-    return this.$node;
-  }
-
-  querySelector(selector) {
-    return this.$node.querySelector(selector);
-  }
 }
 
 export const $ = (el) => {

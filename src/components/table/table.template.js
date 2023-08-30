@@ -1,4 +1,5 @@
 import { $ } from "@core/Dom";
+
 const char = {
   A: 65,
   Z: 91,
@@ -35,29 +36,39 @@ function createBlock(index, titleBlock) {
 
 function createTittleBlock(chars, isAttr = false) {
   let title = $.create("div", "title");
-
   chars.forEach((item, index) => {
     let titleBlock = $.create("div", "title-block");
-    let block = createBlock(index, titleBlock);
-
+    let block = $.create("div", "block");
+    block.innerHTML(item);
+    titleBlock.append(block);
+    titleBlock.setAttribute("data-id", `${index}`);
     if (isAttr) {
-      titleBlock.setAttribute("contenteditable", "true");
-      titleBlock.setAttribute("spellcheck", "false");
+      block.setAttribute("contenteditable", "true");
+      block.setAttribute("spellcheck", "false");
     } else {
-      titleBlock.innerHTML(item);
-      let col = createCol();
-      block.append(col);
+      let col = $.create("div", "col");
+      col.setAttribute("data-resize", "col");
+      titleBlock.append(col);
     }
 
-    title.append(block);
+    title.append(titleBlock);
+    titleBlock.setAttribute("data-type", "resizable");
   });
 
   return title;
 }
 
 function createIndex(html) {
-  let index = $.create("div");
+  let index = $.create("div", "index");
+
   index.innerHTML(html);
+  if (html !== "N") {
+    let row = $.create("div", "row");
+    row.setAttribute("data-resize", "row");
+    index.setAttribute("data-type", "resizable");
+    index.append(row);
+  }
+
   return index;
 }
 
@@ -107,8 +118,7 @@ export function createBody(size = 22, parent) {
 }
 
 export function createHead() {
-  let index = $.create("div", "index");
-  index.innerHTML("N");
+  let index = createIndex("N");
   let head = $.create("div", "t-head");
   head.append(index);
   const chars = createChar();

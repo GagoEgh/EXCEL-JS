@@ -3,11 +3,7 @@ import { ExcelComponent } from "../../core/Excel.component";
 export class Toolbar extends ExcelComponent {
   static className = "toolbar";
   constructor(node) {
-    const options = {
-      name: "Toolbar",
-      listeners: ["click"],
-    };
-    super(node, options);
+    super(node);
   }
 
   toHTML() {
@@ -22,6 +18,6 @@ export class Toolbar extends ExcelComponent {
   }
 
   onClick(event) {
-    // console.log(event.target);
+    console.log(event.target);
   }
 }
