@@ -60,11 +60,15 @@ class Dom {
     return this.$node.classList.toggle(className);
   }
 
-  createStyle(options) {
+  createStyle(options = {}) {
     for (let key in options) {
       this.$node.style[key] = options[key];
     }
     return this.$node;
+  }
+
+  querySelector(selector) {
+    return this.$node.querySelector(selector);
   }
 }
 
