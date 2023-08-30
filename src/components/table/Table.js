@@ -30,4 +30,6 @@ export class Table extends ExcelComponent {
       tableResizer(event, this.$node);
     }
   }
+
+  
 }
