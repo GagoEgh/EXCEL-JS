@@ -40,6 +40,11 @@ class Dom {
     return this;
   }
 
+  removeClass(cl) {
+    this.$node.classList.remove(cl);
+    return this;
+  }
+
   closest(str) {
     return this.$node.closest(str);
   }

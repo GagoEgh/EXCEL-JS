@@ -27,22 +27,23 @@ function createCol() {
 
 function createBlock(index, titleBlock) {
   let block = $.create("div", "block");
-  block.setAttribute("data-id", `${index}`);
+  block.setAttribute("data-block", `${index}`);
   block.append(titleBlock);
   block.setAttribute("data-type", "resizing");
   return block;
 }
 
-function createTittleBlock(chars, isAttr = false) {
+function createTittleBlock(chars, isAttr = false, row = 0) {
   let title = $.create("div", "title");
 
-  chars.forEach((item, index) => {
+  chars.forEach((item, column) => {
     let titleBlock = $.create("div", "title-block");
-    let block = createBlock(index, titleBlock);
+    let block = createBlock(column, titleBlock);
 
     if (isAttr) {
       titleBlock.setAttribute("contenteditable", "true");
       titleBlock.setAttribute("spellcheck", "false");
+      titleBlock.setAttribute("data-id", `${row}:${column}`);
     } else {
       titleBlock.innerHTML(item);
       let col = createCol();
@@ -65,7 +66,6 @@ function createIndexBlock(i) {
   const size = char.Z - char.A;
 
   let width = size * 180 * 2;
-  console.log(width);
   let index = createIndex("" + (i + 1));
   let row = $.create("div", "row");
   row.setAttribute("data-resize", "row");
@@ -95,7 +95,7 @@ export function createBody(size = 22, parent) {
   for (let i = 0; i < size; i++) {
     let indexBlock = createIndexBlock(i);
     let main = $.create("div", "t-main");
-    let title = createTittleBlock(chars, true);
+    let title = createTittleBlock(chars, true, i);
     title.setAttribute("data-row", i);
     main.setAttribute("data-row", i);
     main.append(indexBlock);

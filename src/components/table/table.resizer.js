@@ -36,10 +36,11 @@ export function tableResizer(event, $node) {
   };
 
   document.onmouseup = () => {
+    document.onmousemove = null;
+    document.onmouseup = null;
     if (type === "col") {
-      attribute = $parentNode.getAttribute("data-id");
-      blocks = $($node.$node.querySelectorAll(`[data-id="${attribute}"]`));
-
+      attribute = $parentNode.getAttribute("data-block");
+      blocks = $($node.$node.querySelectorAll(`[data-block="${attribute}"]`));
       $parentNode.createStyle({ width: `${width}px` });
       blocks.$node.forEach((block) => {
         let $block = $(block);
@@ -54,7 +55,6 @@ export function tableResizer(event, $node) {
         $block.createStyle({ height: `${height}px` });
       });
 
-      // ---------------------
       let titleBody = document.querySelector(".title-body");
       let titleBodyHeight = parseInt(getComputedStyle(titleBody).height);
       let cols = $node.$node.querySelectorAll('[data-resize="col"]');
@@ -64,6 +64,5 @@ export function tableResizer(event, $node) {
         $col.createStyle({ height: `${titleBodyHeight + 30}px` });
       });
     }
-    document.onmousemove = null;
   };
 }

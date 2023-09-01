@@ -2,6 +2,8 @@ import { ExcelComponent } from "../../core/Excel.component";
 import { createHead, createBody } from "./table.template";
 import { $ } from "@core/Dom";
 import { tableResizer } from "./table.resizer";
+import { isResizer } from "./table.helpers";
+import { TableSelector } from "./table.selectors";
 
 export class Table extends ExcelComponent {
   static className = "table";
@@ -12,6 +14,15 @@ export class Table extends ExcelComponent {
     };
     super(node, options);
     this.$node = node;
+  }
+  prepare() {
+    this.selector = new TableSelector();
+  }
+
+  init() {
+    super.init();
+    let el = this.$node.querySelector('[data-id="0:0"]');
+    this.selector.getSelector($(el));
   }
 
   toHTML() {
@@ -26,10 +37,14 @@ export class Table extends ExcelComponent {
   }
 
   onMousedown(event) {
-    if (event.target.dataset.resize) {
+    if (isResizer(event)) {
       tableResizer(event, this.$node);
+    } else if (event.target.dataset.id) {
+      if (event.shiftKey) {
+        this.selector.showSelectors($(event.target));
+      } else {
+        this.selector.getSelector($(event.target));
+      }
     }
   }
-
-  
 }
