@@ -64,5 +64,7 @@ export function tableResizer(event, $node) {
         $col.createStyle({ height: `${titleBodyHeight + 30}px` });
       });
     }
+
+    
   };
 }
