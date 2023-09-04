@@ -75,6 +75,10 @@ class Dom {
   querySelector(selector) {
     return this.$node.querySelector(selector);
   }
+
+  focus() {
+    return this.$node.focus();
+  }
 }
 
 export const $ = (el) => {

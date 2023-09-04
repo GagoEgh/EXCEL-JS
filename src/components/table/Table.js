@@ -4,13 +4,15 @@ import { $ } from "@core/Dom";
 import { tableResizer } from "./table.resizer";
 import { isResizer } from "./table.helpers";
 import { TableSelector } from "./table.selectors";
+import { changeSelector } from "./table.helpers";
 
 export class Table extends ExcelComponent {
   static className = "table";
+  size = 24;
   constructor(node) {
     const options = {
       name: "Table",
-      listeners: ["mousedown"],
+      listeners: ["mousedown", "keydown"],
     };
     super(node, options);
     this.$node = node;
@@ -27,7 +29,7 @@ export class Table extends ExcelComponent {
 
   toHTML() {
     this.$node.append(createHead());
-    this.$node.append(createBody(19, this.$node));
+    this.$node.append(createBody(this.size, this.$node));
   }
 
   getstyle(widthOrHeight) {
@@ -46,5 +48,9 @@ export class Table extends ExcelComponent {
         this.selector.getSelector($(event.target));
       }
     }
+  }
+
+  onKeydown(event) {
+    changeSelector(event, this.size);
   }
 }

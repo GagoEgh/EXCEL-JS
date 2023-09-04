@@ -1,5 +1,5 @@
 import { $ } from "@core/Dom";
-const char = {
+export const char = {
   A: 65,
   Z: 91,
 };
