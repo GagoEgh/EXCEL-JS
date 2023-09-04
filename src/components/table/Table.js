@@ -1,6 +1,6 @@
+import { $ } from "@core/Dom";
 import { ExcelComponent } from "../../core/Excel.component";
 import { createHead, createBody } from "./table.template";
-import { $ } from "@core/Dom";
 import { tableResizer } from "./table.resizer";
 import { isResizer } from "./table.helpers";
 import { TableSelector } from "./table.selectors";
@@ -8,7 +8,7 @@ import { changeSelector } from "./table.helpers";
 
 export class Table extends ExcelComponent {
   static className = "table";
-  size = 24;
+  size = 20;
   constructor(node) {
     const options = {
       name: "Table",
@@ -17,6 +17,7 @@ export class Table extends ExcelComponent {
     super(node, options);
     this.$node = node;
   }
+
   prepare() {
     this.selector = new TableSelector();
   }
