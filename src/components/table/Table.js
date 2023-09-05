@@ -7,7 +7,7 @@ import { TableSelector } from "./table.selectors";
 import { changeSelector } from "./table.helpers";
 
 export class Table extends ExcelComponent {
-  
+
   static className = "table";
   size = 20;
   constructor(node, emitter) {
@@ -74,7 +74,6 @@ export class Table extends ExcelComponent {
 
   onClick(event) {
     let selector = $(event.target);
-    let text = selector.getText();
     this.emit("selector:input", selector.getText());
   }
 }
