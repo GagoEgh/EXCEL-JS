@@ -23,6 +23,10 @@ class Dom {
     return this.$node.outerHTML.trim();
   }
 
+  getText() {
+    return this.$node.innerText;
+  }
+
   on(event, callback) {
     this.$node.addEventListener(event, callback);
   }

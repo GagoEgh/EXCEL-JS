@@ -46,7 +46,9 @@ export function tableResizer(event, $node) {
         let $block = $(block);
         $block.createStyle({ width: `${width}px` });
       });
+   
     } else {
+      
       attribute = $parentNode.getAttribute("data-row");
       blocks = $($node.$node.querySelectorAll(`[data-row="${attribute}"]`));
 
@@ -64,7 +66,5 @@ export function tableResizer(event, $node) {
         $col.createStyle({ height: `${titleBodyHeight + 30}px` });
       });
     }
-
-    
   };
 }

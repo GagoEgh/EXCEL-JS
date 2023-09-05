@@ -2,10 +2,11 @@ import { ExcelComponent } from "../../core/Excel.component";
 
 export class Toolbar extends ExcelComponent {
   static className = "toolbar";
-  constructor(node) {
+  constructor(node, emitter) {
     const options = {
       name: "Toolbar",
       listeners: ["click"],
+      emitter: emitter,
     };
     super(node, options);
   }

@@ -10,10 +10,11 @@ export class Table extends ExcelComponent {
   
   static className = "table";
   size = 20;
-  constructor(node) {
+  constructor(node, emitter) {
     const options = {
       name: "Table",
-      listeners: ["mousedown", "keydown"],
+      listeners: ["mousedown", "keydown", "input", "click"],
+      emitter: emitter,
     };
     super(node, options);
     this.$node = node;
@@ -25,8 +26,18 @@ export class Table extends ExcelComponent {
 
   init() {
     super.init();
+    let table;
     let el = this.$node.querySelector('[data-id="0:0"]');
     this.selector.getSelector($(el));
+
+    this.subscribe("formula:input", (data) => {
+      table = $(this.$node.querySelector(".selector"));
+      table.innerHTML(data);
+    });
+
+    this.subscribe("formula:drop", () => {
+      table.focus();
+    });
   }
 
   toHTML() {
@@ -54,5 +65,16 @@ export class Table extends ExcelComponent {
 
   onKeydown(event) {
     changeSelector(event, this.size);
+  }
+
+  onInput(event) {
+    let selector = $(event.target);
+    this.emit("selector:input", selector.getText());
+  }
+
+  onClick(event) {
+    let selector = $(event.target);
+    let text = selector.getText();
+    this.emit("selector:input", selector.getText());
   }
 }

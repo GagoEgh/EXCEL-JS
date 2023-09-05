@@ -2,8 +2,12 @@ import { ExcelComponent } from "../../core/Excel.component";
 
 export class Header extends ExcelComponent {
   static className = "header";
-  constructor(node){
-    super(node);
+  constructor(node, emitter) {
+    const option = {
+      name: "Header",
+      emitter: emitter,
+    };
+    super(node, option);
   }
   toHTML() {
     return `
