@@ -1,11 +1,13 @@
 import { ExcelComponent } from "../../core/Excel.component";
+import { $ } from "@core/Dom";
 
 export class Formula extends ExcelComponent {
   static className = "formula";
-  constructor(node) {
+  constructor(node, emitter) {
     const option = {
       name: "Formula",
-      listeners: ["input", "click"],
+      listeners: ["input", "keydown"],
+      emitter: emitter,
     };
 
     super(node, option);
@@ -15,6 +17,7 @@ export class Formula extends ExcelComponent {
     return `
         <div class="info">fx</div>
         <div
+          id = "input"
           class="div-input"
           contenteditable="true"
           spellcheck="false"
@@ -22,11 +25,24 @@ export class Formula extends ExcelComponent {
     `;
   }
 
+  init() {
+    super.init();
+    this.subscribe("selector:input", (data) => {
+      const input = $(this.$node.querySelector("#input"));
+      input.innerHTML(data);
+    });
+
+  }
+  
   onInput(event) {
-    console.log("on input", event.target.innerHTML);
+    this.emit("formula:input", event.target.innerHTML);
   }
 
-  onClick(event) {
-    // console.log("on click", event.target);
+  onKeydown(event) {
+    const keys = ["Enter", "Tab"];
+    if (keys.includes(event.code)) {
+      event.preventDefault();
+      this.emit("formula:drop");
+    }
   }
 }
